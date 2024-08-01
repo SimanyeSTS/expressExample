@@ -5,8 +5,13 @@ config()
 
 const app = express()
 const port = +process.env.PORT || 4000
+const productURL = 'http://localhost:3000/products'
 
 app.use(express.static('./static'))
+
+async function getData() {
+    return await (await fetch(productURL)).json()
+}
 
 app.get('/', (req, res) => {
     res.status(200).sendFile(path.resolve(
